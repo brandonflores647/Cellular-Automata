@@ -6,12 +6,18 @@ body {
   margin: 0;
 }
 
-#cell-container {
+#control-container {
+  display: flex;
+  gap: 24px;
+
+  margin: 120px 0px 0px 200px;
+}
+
+#noise-container {
   display: flex;
   flex-wrap: wrap;
 
   width: fit-content;
-  margin: 120px 0px 0px 200px;
 
   overflow: hidden;
 

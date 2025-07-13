@@ -1,20 +1,26 @@
-import { useState } from "preact/hooks";
+import { useRef, useState } from "preact/hooks";
+import { NoiseControl } from "./NoiseControl";
+import { NoiseGrid } from "./NoiseGrid";
+import type { IConfig } from "./types";
 
 export function App() {
-  const [cells, _] = useState(generateNoise(32, 0.5));
+  const gridSize = useRef(32);
+  const gridDensity = useRef(50);
+  const [cells, setCells] = useState(
+    generateNoise(gridSize.current, gridDensity.current / 100)
+  );
+
+  const config: IConfig = {
+    size: gridSize,
+    density: gridDensity,
+    setCells,
+    generateNoise,
+  };
 
   return (
-    <div id="cell-container">
-      {cells.map((row, rIndex) => (
-        <div key={`row-${rIndex}`}>
-          {row.map((cell, cIndex) => (
-            <div
-              key={`cell-${rIndex}-${cIndex}`}
-              className={`cell ${cell && "filled"}`}
-            />
-          ))}
-        </div>
-      ))}
+    <div id="control-container">
+      <NoiseControl config={config} />
+      <NoiseGrid cells={cells} />
     </div>
   );
 }
@@ -26,7 +32,7 @@ export function App() {
  */
 const generateNoise = (size: number, density: number) => {
   const grid = Array.from({ length: size }, () =>
-    Array.from({ length: size }, () => (Math.random() < density ? 1 : 0))
+    Array.from({ length: size }, () => (Math.random() < density / 100 ? 1 : 0))
   );
   return grid;
 };
