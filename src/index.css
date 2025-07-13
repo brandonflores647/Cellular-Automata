@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#cell-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: fit-content;
+  margin: 120px 0px 0px 200px;
+
+  overflow: hidden;
+
+  border: 4px solid rgb(34, 38, 42);
+  border-radius: 8px;
+}
+
+.cell {
+  min-width: 12px;
+  max-width: 12px;
+  min-height: 12px;
+  max-height: 12px;
+
+  background-color: rgb(179, 200, 220);
+}
+
+.filled {
+  background-color: rgb(70, 79, 88);
+}
