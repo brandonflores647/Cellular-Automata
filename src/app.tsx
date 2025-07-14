@@ -13,6 +13,7 @@ export function App() {
   const config: IConfig = {
     size: gridSize,
     density: gridDensity,
+    cells,
     setCells,
     generateNoise,
   };
@@ -34,5 +35,13 @@ const generateNoise = (size: number, density: number) => {
   const grid = Array.from({ length: size }, () =>
     Array.from({ length: size }, () => (Math.random() < density / 100 ? 1 : 0))
   );
+
+  // force a border
+  for (let i = 0; i < size; i++) {
+    grid[i][0] = 1;
+    grid[i][size - 1] = 1;
+    grid[0][i] = 1;
+    grid[size - 1][i] = 1;
+  }
   return grid;
 };

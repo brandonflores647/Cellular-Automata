@@ -1,7 +1,53 @@
+import { cloneDeep } from "lodash";
+import { useCallback } from "preact/hooks";
 import type { IConfig } from "./types";
 
 export function NoiseControl({ config }: { config: IConfig }) {
   const { size, density, setCells, generateNoise } = config;
+
+  const handleIteration = useCallback(() => {
+    const original = config.cells;
+    const height = original.length;
+    const width = original[0].length;
+
+    const newGrid = cloneDeep(original);
+
+    const countWallsAround = (x: number, y: number) => {
+      let count = 0;
+      for (let offsetY = -1; offsetY <= 1; offsetY++) {
+        for (let offsetX = -1; offsetX <= 1; offsetX++) {
+          if (offsetX === 0 && offsetY === 0) continue;
+
+          const nx = x + offsetX;
+          const ny = y + offsetY;
+
+          if (
+            nx < 0 ||
+            ny < 0 ||
+            nx >= width ||
+            ny >= height ||
+            original[ny][nx] === 1
+          ) {
+            count++;
+          }
+        }
+      }
+      return count;
+    };
+
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const wallCount = countWallsAround(x, y);
+        if (original[y][x] === 1) {
+          newGrid[y][x] = wallCount >= 4 ? 1 : 0;
+        } else {
+          newGrid[y][x] = wallCount >= 5 ? 1 : 0;
+        }
+      }
+    }
+
+    setCells(newGrid);
+  }, [config]);
 
   return (
     <div>
@@ -34,6 +80,8 @@ export function NoiseControl({ config }: { config: IConfig }) {
           }}
         />
       </div>
+
+      <button onClick={handleIteration}>Apply Iteration</button>
     </div>
   );
 }

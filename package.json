@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.26.9"
+    "lodash": "^4.17.21",
+    "preact": "^10.26.9",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.2",
+    "@types/lodash": "^4.17.20",
     "typescript": "~5.8.3",
     "vite": "^7.0.4"
   }
