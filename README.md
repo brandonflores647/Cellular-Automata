@@ -1,86 +1,26 @@
-# Cellular Automata Cave/Dungeon Generation
+# Cellular Automata Cave Generation
 
-A React/Preact application that demonstrates cellular automata algorithms for procedural cave and dungeon generation. This project showcases how simple rules can create complex, organic-looking cave systems.
+A simple and effective technique for generating natural-looking cave systems in grid-based environments using cellular automata.
 
-## Features
+---
 
-- **Procedural Generation**: Generate random cave layouts using cellular automata
-- **Interactive Controls**: Adjust grid size and initial density
-- **Iterative Evolution**: Apply cellular automata rules to evolve the cave structure
-- **Real-time Visualization**: See changes immediately in the grid display
-- **Responsive Design**: Works on desktop and mobile devices
+## Overview
 
-## Project Structure
+Cellular automata cave generation starts with a random noise map, where each cell is randomly set as **solid** or **empty** based on a density value. Higher density values create more walls, while lower densities leave more open space. The initial noise looks chaotic, so the map is smoothed iteratively using cellular automata rules to form more natural cave shapes.
 
-```
-src/
-├── components/           # React components
-│   ├── DescriptionBox.tsx    # Project description and metadata
-│   ├── NoiseControl.tsx      # Control panel for parameters
-│   └── NoiseGrid.tsx         # Grid visualization component
-├── utils/               # Utility functions and constants
-│   ├── cellularAutomata.ts   # Core cellular automata logic
-│   └── constants.ts          # Application constants and configuration
-├── types.ts             # TypeScript type definitions
-├── app.tsx              # Main application component
-├── main.tsx             # Application entry point
-└── index.css            # Global styles
-```
+Each iteration examines every cell and counts how many of its neighbors (typically the 8 surrounding cells) are solid. If a cell has enough solid neighbors, it becomes or remains solid. Running multiple iterations gradually removes isolated cells and smooths the structure, resulting in organic cave-like patterns. You can adjust the number of iterations and rules to control how open or tight the caves feel.
 
-## Core Algorithms
+---
 
-### Cellular Automata Rules
+## Fun Fact
 
-The application implements a simple cellular automata system where:
+Popular games like **Stardew Valley** use similar cellular automata methods to generate their cave systems, creating interesting underground areas for players to explore.
 
-- **Wall cells** survive if they have 4 or more neighboring walls
-- **Empty cells** become walls if they have 5 or more neighboring walls
-- **Borders** are always treated as walls
+---
 
-### Generation Process
+## Explore the Code
 
-1. **Initial Noise**: Generate random grid with specified density
-2. **Border Creation**: Force walls around the perimeter
-3. **Iteration**: Apply cellular automata rules to smooth and connect areas
-4. **Visualization**: Display the result in an interactive grid
+Enjoy the demo and want to see how it works?  
+Check out the source code to explore the full implementation and see how the noise map transforms into cave-like structures using cellular automata.
 
-## Usage
-
-1. **Adjust Size**: Set the grid dimensions (12-64 cells)
-2. **Set Density**: Control initial wall density (0-100%)
-3. **Generate**: Create a new random cave layout
-4. **Iterate**: Apply cellular automata rules to evolve the structure
-
-## Technical Details
-
-- **Framework**: Preact (React-compatible)
-- **Styling**: Styled Components
-- **Language**: TypeScript
-- **Build Tool**: Vite
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## Contributing
-
-This project is organized with clean separation of concerns:
-
-- **Components**: UI logic and presentation
-- **Utils**: Business logic and algorithms
-- **Types**: TypeScript definitions
-- **Constants**: Configuration values
-
-When adding new features, follow the existing patterns and maintain the organized structure.
+---
