@@ -1,4 +1,6 @@
 import { useRef, useState } from "preact/hooks";
+import styled from "styled-components";
+import { DescriptionBox } from "./DescriptionBox";
 import { NoiseControl } from "./NoiseControl";
 import { NoiseGrid } from "./NoiseGrid";
 import type { IConfig } from "./types";
@@ -19,12 +21,19 @@ export function App() {
   };
 
   return (
-    <div id="control-container">
-      <NoiseControl config={config} />
-      <NoiseGrid config={config} />
-    </div>
+    <AppContainer>
+      <DescriptionBox />
+      <div id="control-container">
+        <NoiseControl config={config} />
+        <NoiseGrid config={config} />
+      </div>
+    </AppContainer>
   );
 }
+
+const AppContainer = styled.div`
+  padding-top: 24px;
+`;
 
 /** Generate Noise
  * @param size - The size of the grid (size x size)

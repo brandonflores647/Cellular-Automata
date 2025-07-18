@@ -4,6 +4,7 @@
 
 body {
   height: 100vh;
+  margin: 0;
 
   background-image: repeating-conic-gradient(#ffebc1 0% 25%, #fff8ea 0% 50%);
   background-size: 200px 200px;
