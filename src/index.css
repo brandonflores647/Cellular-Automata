@@ -9,6 +9,8 @@ body {
   background-image: repeating-conic-gradient(#ffebc1 0% 25%, #fff8ea 0% 50%);
   background-size: 200px 200px;
   animation: checkerMove 6s linear infinite;
+
+  overflow-x: hidden;
 }
 @keyframes checkerMove {
   from {
@@ -25,4 +27,12 @@ body {
   gap: 24px;
 
   width: 100vw;
+}
+
+@media (max-width: 768px) {
+  #control-container {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 64px;
+  }
 }
