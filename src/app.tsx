@@ -7,7 +7,7 @@ export function App() {
   const gridSize = useRef(32);
   const gridDensity = useRef(50);
   const [cells, setCells] = useState(
-    generateNoise(gridSize.current, gridDensity.current / 100)
+    generateNoise(gridSize.current, gridDensity.current)
   );
 
   const config: IConfig = {
@@ -21,7 +21,7 @@ export function App() {
   return (
     <div id="control-container">
       <NoiseControl config={config} />
-      <NoiseGrid cells={cells} />
+      <NoiseGrid config={config} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { cloneDeep } from "lodash";
 import { useCallback } from "preact/hooks";
+import styled from "styled-components";
 import type { IConfig } from "./types";
 
 export function NoiseControl({ config }: { config: IConfig }) {
@@ -50,7 +51,7 @@ export function NoiseControl({ config }: { config: IConfig }) {
   }, [config]);
 
   return (
-    <div>
+    <ControlContainer>
       <div>
         Size:
         <input
@@ -59,7 +60,7 @@ export function NoiseControl({ config }: { config: IConfig }) {
           onInput={(e) => {
             size.current = Math.max(
               12,
-              Math.min(128, Number((e.target as HTMLInputElement).value))
+              Math.min(64, Number((e.target as HTMLInputElement).value))
             );
             setCells(generateNoise(size.current, density.current));
           }}
@@ -82,6 +83,14 @@ export function NoiseControl({ config }: { config: IConfig }) {
       </div>
 
       <button onClick={handleIteration}>Apply Iteration</button>
-    </div>
+    </ControlContainer>
   );
 }
+
+const ControlContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding-top: 32px;
+`;
